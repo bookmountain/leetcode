@@ -16,4 +16,4 @@ function linearSearch(arr, n) {
     return -1;
 }
 
-linearSearch(numbers, 32);
+linearSearch(numbers, 19);
