@@ -6,8 +6,8 @@ function bubbleSort(arr) {
         // adjacent elements
         console.log(arr);
         for (let j = arr.length - 1; j >= i + 1; j--) {
-            console.log(j, i + 1);
             if (arr[j] < arr[j - 1]) {
+                console.log(arr[j], arr[j - 1]);
                 // swap arr[j] and arr[j - 1]
                 swapping = true;
                 let temp = arr[j];
@@ -24,4 +24,4 @@ function bubbleSort(arr) {
     console.log(step);
 }
 
-bubbleSort([1, 2, 3, 4, 0, 5, 6, 7]);
+bubbleSort([2, 3, 4, 0, 5, 6, 1, 7]);

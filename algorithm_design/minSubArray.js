@@ -29,4 +29,4 @@ function minSubArray(arr, sum) {
     }
 }
 
-minSubArray([8, 1, 6, 15, 3, 16, 5, 7, 14, 3 0, 12], 60);
+minSubArray([8, 1, 6, 15, 3, 16, 5, 7, 14, 3, 0, 12], 60);

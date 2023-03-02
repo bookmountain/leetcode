@@ -1,4 +1,5 @@
 function merge(a1, a2) {
+    // a1, a2 will be sorted arrays due to divided to the minium length
     let result = [];
     let i = 0;
     let j = 0;
@@ -23,11 +24,10 @@ function merge(a1, a2) {
         result.push(a2[j]);
         j++;
     }
+    console.log(result);
 
     return result;
 }
-
-console.log(merge([1, 15, 17], [-3, 9, 16]));
 
 function mergeSort(arr) {
     if (arr.length === 1) {
@@ -36,6 +36,7 @@ function mergeSort(arr) {
         let middle = Math.floor(arr.length / 2);
         let left = arr.slice(0, middle);
         let right = arr.slice(middle, arr.length);
+        console.log(left, right);
         return merge(mergeSort(left), mergeSort(right));
     }
 }

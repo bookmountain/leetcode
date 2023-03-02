@@ -1,6 +1,6 @@
 let unsorted = [14, -4, 17, 6, 22, 1, -5];
 
-insertionSort(unsorted);
+console.log(insertionSort(unsorted));
 
 function insertionSort(arr) {
     for (let j = 1; j <= arr.length - 1; j++) {
@@ -9,7 +9,7 @@ function insertionSort(arr) {
         console.log(arr);
         while (i >= 0 && arr[i] > key) {
             arr[i + 1] = arr[i];
-            i -= 1;
+            i--;
         }
         arr[i + 1] = key;
     }

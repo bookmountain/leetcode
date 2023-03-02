@@ -1,75 +1,150 @@
-class LinkedList {
-    constructor() {
-        this.length = 0;
-        this.head = null;
-    }
-    // add node to the tail
-    append(item) {
-        let node = new Node(item);
-
-        // if first node
-        if (!this.head) {
-            this.head = node;
-        } else {
-            // else find the tail
-            let tail = this.head;
-            while (tail.next !== null) {
-                tail = tail.next;
-            }
-            tail.next = node;
-        }
-        this.length++;
-    }
-
-    // remove node
-    removeAt(index) {
-        // check if index is qualified
-        if (index < 0 || index > this.length) return null;
-        let current = this.head,
-            prev = null,
-            idx = 0;
-        // if first node
-        if (index === 0) {
-            // point the head to next node
-            this.head = current.next;
-        } else {
-            // else find the index
-            while (idx++ < index) {
-                prev = current; // set prev node as current
-                current = current.next; // and move current to the next node
-            }
-            // index found, link prev.next & current.next
-            prev.next = current.next;
-        }
-        this.length--;
-    }
-
-    insertAt(index, item) {
-        // check if index is qualified
-        if (index < 0 || index > this.length) return null;
-        let node = new Node(item);
-        let current = this.head,
-            prev = null,
-            idx = 0;
-        // if first node
-        if (index === 0) {
-            this.head = node;
-            node.next = current;
-        } else {
-            while (idx++ < index) {
-                prev = current;
-                current = current.next;
-            }
-            prev.next = node;
-            node.next = current;
-        }
-        this.length++;
-    }
-}
-
 class Node {
-    constructor(item) {
-        this.item = item;
+    constructor(value) {
+        this.value = value;
         this.next = null;
     }
 }
+
+class LinkedList {
+    constructor() {
+        this.head = null;
+        this.length = 0;
+    }
+    push(value) {
+        let newNode = new Node(value);
+        if (this.head === null) {
+            this.head = newNode;
+        } else {
+            let currentNode = this.head;
+            while (currentNode.next !== null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = newNode;
+        }
+        this.length++;
+    }
+
+    pop() {
+        if (!this.head) {
+            return null;
+        } else if (this.length === 1) {
+            let temp = this.head;
+            this.head = null;
+            this.length = 0;
+            return temp;
+        } else {
+            let currentNode = this.head;
+            for (let i = 1; i <= this.length - 2; i++) {
+                currentNode = currentNode.next;
+            }
+            let temp = currentNode.next;
+            currentNode.next = null;
+            this.length--;
+            return temp;
+        }
+    }
+
+    shift() {
+        if (!this.head) {
+            return null;
+        } else if (this.length === 1) {
+            let temp = this.head;
+            this.head = null;
+            this.length = 0;
+            return temp;
+        } else {
+            let temp = this.head;
+            this.head = this.head.next;
+            this.length--;
+            return temp;
+        }
+    }
+
+    unshift(value) {
+        if (!this.head) {
+            this.head = new Node(value);
+        } else {
+            let temp = this.head;
+            let newNode = new Node(value);
+            this.head = newNode;
+            this.head.next = temp;
+        }
+        this.length++;
+    }
+
+    insertAt(index, value) {
+        if (index > this.size || index < 0) {
+            console.log("Index out of range");
+            return null;
+        } else if (index === 0) {
+            this.unshift(value);
+        } else if (index === this.length) {
+            this.push(value);
+            return;
+        }
+
+        let currentNode = this.head;
+        let newNode = new Node(value);
+        for (let i = 1; i <= index - 1; i++) {
+            currentNode = currentNode.next;
+        }
+        newNode.next = currentNode.next;
+        currentNode.next = newNode;
+        this.length++;
+        return;
+    }
+
+    removeAt(index) {
+        if (index < 0 || index >= this.length) {
+            console.log("Index out of range");
+            return null;
+        } else if (index === 0) {
+            return this.shift();
+        } else if (index === this.length - 1) {
+            return this.pop();
+        } else {
+            let currentNode = this.head;
+            for (let i = 1; i <= index - 1; i++) {
+                currentNode = currentNode.next;
+            }
+            let temp = currentNode.next;
+            currentNode.next = currentNode.next.next;
+            this.length--;
+            return temp;
+        }
+    }
+
+    get(index) {
+        if (index < 0 || index >= this.length) {
+            console.log("Index out of range");
+            return null;
+        } else {
+            let currentNode = this.head;
+            for (let i = 1; i <= index; i++) {
+                currentNode = currentNode.next;
+            }
+            return currentNode;
+        }
+    }
+
+    printAll() {
+        if (this.length === 0) {
+            console.log("Nothing in this linked list");
+            return;
+        }
+        let currentNode = this.head;
+        while (currentNode !== null) {
+            console.log(currentNode.value);
+            currentNode = currentNode.next;
+        }
+    }
+}
+
+let myLinkedList = new LinkedList();
+myLinkedList.push("Mike");
+myLinkedList.push("Harry");
+myLinkedList.push("James");
+myLinkedList.insertAt(2, "Gordon");
+console.log(myLinkedList.get(3));
+
+myLinkedList.printAll();
