@@ -40,7 +40,7 @@ function heapSort() {
         arr[0] = arr[i];
         arr[i] = temp;
         heapSize -= 1;
-        maxHeapify(0);
+        0;
     }
 
     return arr;
