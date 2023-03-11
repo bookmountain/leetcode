@@ -79,8 +79,8 @@ const DFS = (starter) => {
 
 const BFS = (starter) => {
     let queue = [];
-    queue.push(starter);
     starter.visited = true;
+    queue.push(starter);
 
     while (queue.length > 0) {
         let firstNode = queue.shift();
@@ -96,4 +96,4 @@ const BFS = (starter) => {
     return result;
 };
 
-console.log(DFS(A));
+console.log(DFS(E));
