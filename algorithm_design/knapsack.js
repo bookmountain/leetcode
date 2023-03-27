@@ -20,7 +20,6 @@ function knapsack(capacity, weights, values, n) {
     return K[n][capacity];
 }
 
-// Example usage:
 let capacity = 7;
 let weights = [3, 4, 2, 5, 1];
 let values = [4, 5, 3, 1, 2];

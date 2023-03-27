@@ -82,7 +82,7 @@ class BinarySearchTree {
         }
     }
 
-    bftt(n) {
+    breadthFirstTreeTraversal(n) {
         if (n !== null) {
             this.queue.push(n);
             for (let i = 0; i < this.queue.length; i++) {
