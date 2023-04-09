@@ -1,13 +1,24 @@
-function fs(n) {
-    if (n == 0) {
-        return 0;
-    } else if (n == 1) {
-        return 1;
+function memoize(fn) {
+    const cache = {};
+    return function (...args) {
+        if (cache[args]) {
+            return cache[args];
+        }
+        const result = fn.apply(this, args);
+        cache[args] = result;
+
+        return result;
+    };
+}
+
+function slowFib(n) {
+    if (n < 2) {
+        return n;
     } else {
-        return fs(n - 1) + fs(n - 2);
+        return fib(n - 1) + fib(n - 2);
     }
 }
 
-for (let index = 0; index < 10; index++) {
-    console.log(fs(index));
-}
+const fib = memoize(slowFib);
+
+console.log(fib(10));
