@@ -1,6 +1,6 @@
 var maxSlidingWindow = function (nums, k) {
     const res = [];
-    const deque = [];
+    const deque = [s];
     let l = 0;
     let r = 0;
 
