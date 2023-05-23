@@ -3,7 +3,7 @@ var maxDepth = function (root) {
         return 0;
     }
     // Recursive DFS
-    return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    // return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 
     // BFS
     // let level = 0;
@@ -23,4 +23,19 @@ var maxDepth = function (root) {
     // }
 
     // return level;
+
+    // Iterative DFS
+    const stack = [{ node: root, depth: 1 }];
+    let res = 1;
+    while (stack.length > 0) {
+        const { node, depth } = stack.pop();
+
+        if (node) {
+            res = Math.max(res, depth);
+            stack.push({ node: node.left, depth: depth + 1 });
+            stack.push({ node: node.right, depth: depth + 1 });
+        }
+    }
+
+    return res;
 };
