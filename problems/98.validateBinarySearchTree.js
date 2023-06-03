@@ -10,12 +10,17 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-var isValidBST = function (root, min = Number.MIN_SAFE_INTEGER, max = Number.MAX_SAFE_INTEGER) {
-    if (!root) {
-        return true;
+var isValidBST = function (root) {
+    function isValid(node, left, right) {
+        if (!node) {
+            return true;
+        }
+        if (!(node.val < right && node.val > left)) {
+            return false;
+        }
+
+        return isValid(node.left, left, node.val) && isValid(node.right, node.val, right);
     }
-    if (root.val <= min || root.val >= max) {
-        return false;
-    }
-    return isValidBST(root.left, min, root.val) && isValidBST(root.right, root.val, max);
+
+    return isValid(root, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
 };
