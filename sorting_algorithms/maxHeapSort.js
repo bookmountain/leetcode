@@ -1,6 +1,6 @@
 let heapSize;
 let arr = [15, 3, 17, -17, 18, 20, 2, 1, 666];
-heapSort();
+maxhHeapSort();
 console.log("heap sorted", arr);
 
 function buildMaxHeap() {
@@ -31,7 +31,8 @@ function maxHeapify(i) {
         maxHeapify(largest);
     }
 }
-function heapSort() {
+
+function maxhHeapSort() {
     buildMaxHeap();
     console.log("max heap", arr);
     for (let i = arr.length - 1; i >= 0; i--) {
@@ -40,7 +41,7 @@ function heapSort() {
         arr[0] = arr[i];
         arr[i] = temp;
         heapSize -= 1;
-        0;
+        maxHeapify(0);
     }
 
     return arr;
