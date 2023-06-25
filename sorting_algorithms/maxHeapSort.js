@@ -22,7 +22,6 @@ function maxHeapify(i) {
     if (r <= heapSize && arr[r] > arr[largest]) {
         largest = r;
     }
-
     if (largest != i) {
         // swap arr[i] with arr[largest]
         let temp = arr[i];

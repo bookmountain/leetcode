@@ -1,5 +1,5 @@
 let heapSize;
-let arr = [4, 5, 8, 2];
+let arr = [15, 3, 17, -17, 18, 20, 2, 1, 666];
 minHeapSort();
 console.log("heap sorted", arr);
 
