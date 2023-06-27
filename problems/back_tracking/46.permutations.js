@@ -1,20 +1,20 @@
 var permute = function (nums) {
-    const res = [];
-
-    if (nums.length === 1) {
-        return [[...nums]];
-    }
-
-    for (let i = 0; i < nums.length; i++) {
-        const n = nums.shift();
-        const perms = permute(nums);
-
-        for (const perm of perms) {
-            res.push(perm.concat(n));
-        }
-        nums.push(n);
-    }
-    return res;
+    const result = [];
+    backtrack(nums, [], result);
+    return result;
 };
+
+function backtrack(nums, temp, result) {
+    if (temp.length === nums.length) {
+        result.push([...temp]);
+        return;
+    }
+    for (let i = 0; i < nums.length; i++) {
+        if (temp.includes(nums[i])) continue;
+        temp.push(nums[i]);
+        backtrack(nums, temp, result);
+        temp.pop();
+    }
+}
 
 console.log(permute([1, 2, 3]));
