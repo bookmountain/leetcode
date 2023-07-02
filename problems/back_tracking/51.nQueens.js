@@ -1,111 +1,30 @@
-let perfect = 0;
-NQueens(4);
-console.log("Number of Perfect Solutions is " + perfect);
-
-function NQueens(n) {
-    let arr = [];
-    for (let i = 0; i < n; i++) {
-        arr.push([]);
-    }
-
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            arr[i][j] = null;
+var solveNQueens = function (n) {
+    const col = new Set();
+    const posDiag = new Set();
+    const negDiag = new Set();
+    const board = new Array(n).fill(0).map(() => new Array(n).fill("."));
+    console.log(board);
+    const res = [];
+    function backtrack(r) {
+        if (r === n) {
+            res.push(board.map((row) => row.join("")));
+            return;
+        }
+        for (let c = 0; c < n; c++) {
+            if (col.has(c) || posDiag.has(r + c) || negDiag.has(r - c)) continue;
+            col.add(c);
+            posDiag.add(r + c);
+            negDiag.add(r - c);
+            board[r][c] = "Q";
+            backtrack(r + 1);
+            board[r][c] = ".";
+            col.delete(c);
+            posDiag.delete(r + c);
+            negDiag.delete(r - c);
         }
     }
+    backtrack(0);
+    return res;
+};
 
-    let i = 0;
-    let j = 0;
-    let loop = true;
-    while (loop) {
-        console.log(i, j);
-
-        arr[i][j] = "Q";
-        // check if Q can stay there
-        let violation = false;
-        let k = 0;
-
-        // check above
-        while (k < i) {˜
-            if (arr[k][j] == "Q") {
-                violation = true;
-            }
-            k++;
-        }
-        k = 0;
-
-        // check left
-        while (k < j) {
-            if (arr[i][k] == "Q") {
-                violation = true;
-            }
-            k++;
-        }
-        k = 1;
-        let l = -1;
-
-        // check left-down diagonal
-        while (i + k < n && j + l >= 0) {
-            if (arr[i + k][j + l] == "Q") {
-                violation = true;
-            }
-            k++;
-            l--;
-        }
-        k = -1;
-
-        // check left-up diagonal
-        while (i + k >= 0 && j + k >= 0) {
-            if (arr[i + k][j + k] == "Q") {
-                violation = true;
-            }
-            k--;
-        }
-
-        if (!violation) {
-            console.log("okay");
-            console.log(arr);
-            if (j == n - 1) {
-                perfect++;
-                console.log("Perfect");
-                console.log(arr);
-                arr[i][j] = null;
-                i++;
-            } else {
-                // next column
-                i = 0;
-                j++;
-            }
-        }
-
-        if (violation) {
-            console.log("not okay");
-            console.log(arr);
-            arr[i][j] = null;
-            i++;
-        }
-
-        function check() {
-            // go back to the previous column
-            j--;
-            for (let b = 0; b < arr.length; b++) {
-                if (arr[b][j] == "Q") {
-                    arr[b][j] = null;
-                    console.log("b and j is ");
-                    console.log(b, j);
-                    i = b + 1;
-                    break;
-                }
-            }
-        }
-
-        while (i >= n) {
-            check();
-            if (j < 0) {
-                console.log("dead end");
-                loop = false;
-                break;
-            }
-        }
-    }
-}
+console.log(solveNQueens(4));
