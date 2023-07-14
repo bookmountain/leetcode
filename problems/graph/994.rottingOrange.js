@@ -45,6 +45,7 @@ var orangesRotting = function (grid) {
         return -1;
     }
 };
+
 console.log(
     orangesRotting([
         [2, 1, 1],
