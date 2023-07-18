@@ -2,29 +2,31 @@ var ladderLength = function (beginWord, endWord, wordList) {
     if (!wordList.includes(endWord)) {
         return 0;
     }
-    const nei = {};
+    function getPattern(word, index) {
+        return word.slice(0, index) + "*" + word.slice(index + 1);
+    }
     wordList.push(beginWord);
+    const nei = {};
     for (const word of wordList) {
-        for (let j = 0; j < word.length; j++) {
-            const pattern = word.slice(0, j) + "*" + word.slice(j + 1);
+        for (let i = 0; i < word.length; i++) {
+            const pattern = getPattern(word, i);
             nei[pattern] = nei[pattern] || [];
             nei[pattern].push(word);
         }
     }
+    const queue = [beginWord];
     const visited = new Set();
     visited.add(beginWord);
-    const queue = [beginWord];
     let res = 1;
-
-    while (queue) {
+    while (queue.length > 0) {
         const size = queue.length;
         for (let i = 0; i < size; i++) {
-            word = queue.shift();
+            const word = queue.shift();
             if (word === endWord) {
                 return res;
             }
             for (let j = 0; j < word.length; j++) {
-                const pattern = word.slice(0, j) + "*" + word.slice(j + 1);
+                const pattern = getPattern(word, j);
                 for (const neiWord of nei[pattern]) {
                     if (!visited.has(neiWord)) {
                         queue.push(neiWord);
