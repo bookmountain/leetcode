@@ -77,14 +77,12 @@ var minCostConnectPoints = function (points) {
             minCost += dist;
 
             for (let i = 0; i < n; i++) {
-                if (!visited.has(i)) {
-                    const [x1, y1] = points[node];
-                    const [x2, y2] = points[i];
-                    const newDist = Math.abs(x1 - x2) + Math.abs(y1 - y2);
-                    if (newDist < distToMST[i]) {
-                        distToMST[i] = newDist;
-                        pq.enqueue({ dist: newDist, node: i });
-                    }
+                const [x1, y1] = points[node];
+                const [x2, y2] = points[i];
+                const newDist = Math.abs(x1 - x2) + Math.abs(y1 - y2);
+                if (newDist < distToMST[i]) {
+                    distToMST[i] = newDist;
+                    pq.enqueue({ dist: newDist, node: i });
                 }
             }
         }
