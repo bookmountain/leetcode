@@ -27,7 +27,7 @@ class PriorityQueue {
             this.values[newIndex] = result;
             // update index number
             newIndex = parentIndex;
-            parenIndex = Math.floor((newIndex - 1) / 2);
+            parentIndex = Math.floor((newIndex - 1) / 2);
         }
     }
 
