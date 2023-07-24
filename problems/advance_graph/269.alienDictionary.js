@@ -19,31 +19,31 @@ var alienOrder = function (words) {
             }
         }
     }
-    const visited = new Set();
-    const stack = new Set();
+    const visited = {};
     const res = [];
 
     function dfs(c) {
-        if (stack.has(c)) {
-            return false;
+        if (visited[c] === 1) {
+            return true; // Cycle detected
         }
-        if (visited.has(c)) {
-            return true;
+        if (visited[c] === 2) {
+            return false; // Already visited and processed
         }
-        stack.add(c);
-        visited.add(c);
+        visited[c] = 1; // Mark as visiting
+
         for (const n of adj[c]) {
-            if (!dfs(n)) {
-                return false;
+            if (dfs(n)) {
+                return true; // Cycle detected
             }
         }
-        stack.delete(c);
+
+        visited[c] = 2; // Mark as visited and processed
         res.push(c);
-        return true;
+        return false;
     }
 
     for (const c in adj) {
-        if (!dfs(c)) {
+        if (dfs(c)) {
             return "";
         }
     }
